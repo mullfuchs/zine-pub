@@ -10,9 +10,13 @@
     <textarea class="form-control" id="description" ng-model="zine.description"></textarea>
   </div>
   <div class="form-group">
-    <label for="image">Image Link</label>
-    <input type="url" class="form-control" id="image" placeholder="" ng-model="zine.image">
+    <label for="file">Image Upload</label>
+    <input type="file" class="form-control" name="imageFile" id="image-bg" placeholder="" ng-model="zine.image">
   </div>
 
   <button type="submit" class="btn btn-warning">MAKE ZINE</button>
 </form>
+
+<textarea type="text" ng-model="zineTitle"></textarea>
+
+<canvas id="zinecover" width="350" height="550"></canvas>

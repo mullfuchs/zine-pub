@@ -1,7 +1,6 @@
 angular.module('ZineCtrls', ['ZineServices'])
 .controller('HomeCtrl', ['$scope', '$http', 'Zine', function($scope, $http, Zine) {
-   $scope.zines = {};
-
+  $scope.zines = {};
    // $scope.zines = Zine.query();
    // console.log($scope.zines);
   $http.get('/api/zines').then(function success(req, res) {
@@ -62,12 +61,57 @@ angular.module('ZineCtrls', ['ZineServices'])
     description: '',
     image: ''
   };
+  
+  $scope.zineTitle = $scope.zine.title;
+  $scope.canvas = document.getElementById('zinecover');
+
+  var ctx = $scope.canvas.getContext('2d');
+  ctx.fillStyle = "#FFA500";
+  ctx.fillRect (0, 0, 350, 550);
+  ctx.font = "48px sans-serif";
+  ctx.fillText($scope.zine.title.toString(), 10, 50);
+
+  $scope.$watch('zine.title', function(){
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, $scope.canvas.width, $scope.canvas.height);
+      ctx.restore();
+      $scope.redraw();
+      //ctx.fillText($scope.zine.title.toString(), 10, 50);
+  });
+
+  $("#image-bg").change(function(e){
+    var URL = window.webkitURL || window.URL;
+    var url = URL.createObjectURL(e.target.files[0]);
+    $scope.zine.image = new Image();
+    $scope.zine.image.src = url;
+
+    $scope.zine.image.onload = function() {
+      $scope.redraw();
+      //img_width = $scope.zine.image.width;
+      //img_height = $scope.zine.image.height;
+      //ctx.drawImage($scope.zine.image, 0, 0, img_width, img_height);
+    }
+  });
+
+  $scope.redraw = function(){
+    if($scope.zine.image){
+      img_width = $scope.zine.image.width;
+      img_height = $scope.zine.image.height;
+      ctx.drawImage($scope.zine.image, 0, 0, img_width, img_height);
+    }
+
+    //ctx.fillRect (0, 0, 350, 550);
+    ctx.fillText($scope.zine.title.toString(), 10, 50);
+  }
 
   $scope.createZine = function() {
     console.log("Clicked new zine button?");
     console.log($scope.zine);
+
+    $scope.zine.image = $scope.canvas.toDataURL();
+
     $http.post('/api/zines', $scope.zine).then(function success(res) {
-      console.log(res.data);
       $location.path('/');
     }, function error (res){
       console.log(res);
