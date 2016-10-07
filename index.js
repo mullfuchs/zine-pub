@@ -1,12 +1,18 @@
 var express  = require('express');
 var app = express();   
 var mongoose = require('mongoose');
+
+
 var bodyParser = require('body-parser');
 var path = require('path');
 
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var secret = 'process.env.JWT_SECRET';
+
+var multer = require('multer');
+// app.use('/uploads', express.static(__dirname + &quot;/uploads&quot;));
+// app.use(multer({dest: './uploads/'}))
 
 mongoose.connect('mongodb://localhost/zinepub');
 
@@ -19,26 +25,15 @@ app.use(require('morgan')('dev'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/*', function(req, res) {
-//   res.sendFile(path.join(__dirname, 'public/index.html'));
-// });
-
-
-
 app.use('/api/zines', require('./controllers/zines'));
 
 app.use('/api/users', expressJWT({secret: secret}).unless({method: 'POST'}), require('./controllers/users'));
 
-app.post('/api/zines', function(req, res){
-  Zine.create(req.body, function(err, zine){
-    console.log(err);
-    //console.log(zine);
-  });
-});
-
-// app.get('/api/zines', function(req, res){
-//   //console.log("grabbing zines?");
-//   //console.log(Zine.query());
+// app.post('/api/zines', function(req, res){
+//   //console.log('zine post route in index.js');
+//   Zine.create(req.body, function(err, zine){
+//     console.log('zine post route in index.js');
+//   });
 // });
 
 app.use(function (err, req, res, next) {

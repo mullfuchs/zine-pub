@@ -1,0 +1,9 @@
+.zinePage{
+  width: 350px;
+  height: 550px;
+  background-color: rgb(200, 200, 100);
+  display: inline-block;
+  float: left;
+  padding: 20px;
+  margin: 20px;
+}

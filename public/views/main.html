@@ -1,9 +1,8 @@
 <h1>I Want To Publish Zin.es</h1>
 
-<h3>main.html</h3>
 
 <div ng-repeat="zine in zines">
-<h2>{{zine.title}}</h2>
-<img src='{{zine.image}}'>  
+<h2><a ng-href="/zines/{{zine.id}}">{{zine.title}}</a></h2>
+<p>{{zine.description}}</p>
 </div>
 

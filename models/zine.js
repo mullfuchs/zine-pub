@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var ZineSchema = new mongoose.Schema({
   title: String,
   description: String,
-  image: String
+  image: String,
+  pages: []
 });
 
 ZineSchema.set('toJSON', {
@@ -12,7 +13,8 @@ ZineSchema.set('toJSON', {
       id: ret._id,
       title: ret.title,
       description: ret.description,
-      image: ret.image
+      image: ret.image,
+      pages: ret.pages
     };
     return returnJson;
   }

@@ -29,6 +29,11 @@ angular.module('ZineApp', ['ui.router', 'ZineCtrls'])
     url: '/newzine',
     templateUrl: 'views/newzine.html',
     controller: 'NewZineCtrl'
+  })
+  .state('showzine',{
+    url: '/zines/:id',
+    templateUrl: 'views/showzine.html',
+    controller: 'ZineShowCtrl'
   });
   $locationProvider.html5Mode(true);
 }]);
