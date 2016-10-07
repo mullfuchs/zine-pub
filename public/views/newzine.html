@@ -18,24 +18,36 @@
       <label for="pageText">Text</label>
       <textarea class="form-control" id="pagetext" ng-model="currentPage.pageText"></textarea>
     </div>
+
+    <label for="textColor">Text Color</label>
+    <input type="text" id="textColor" class="basic" ng-model="currentPage.textColor">
+
+    <label for="textBGColor">Text Background Color</label>
+    <input type="text" id="textBGColor" class="basic" ng-model="currentPage.textBGColor">
+    
     <div class="form-group">
       <label for="file">Image Hotlink</label>
       <input type="text" class="form-control" name="imageFile" id="image-bg" placeholder="" ng-model="currentPage.bgImage">
     </div>
-    <button ng-click="createZine()" class="btn btn-warning">PUBLISH ZINE</button>
+
+    
+    
     <button ng-click="addPage()" class="btn btn-primary">Add this page</button>
+
+    <button ng-click="createZine()" class="btn btn-warning">PUBLISH ZINE</button>
+
   </div>
   <div class="col-md-4">
 
     <div id="zinepreview" class="zinePage" ng-style="{'background-image':'url(' + currentPage.bgImage + ')'}">
-      <h4>{{currentPage.heading}}</h4>
-      <p>{{currentPage.pageText}}</p>
+      <h4 style="color:{{currentPage.textColor}}; background-color:{{currentPage.textBGColor}};">{{currentPage.heading}}</h4>
+      <p style="color:{{currentPage.textColor}}; background-color:{{currentPage.textBGColor}};">{{currentPage.pageText}}</p>
     </div>
   </div>
 </div>
 
 
   <div id="zinepreview" class="zinePage" ng-style="{'background-image':'url(' + page.backgroundImage + ')'}" ng-repeat="page in zine.pages track by $index" >
-    <h4>{{page.title}}</h4>
-    <p>{{page.description}}</p>
+    <h4 style="color:{{page.textColor}}; background-color:{{page.textBGColor}};">{{page.title}}</h4>
+    <p style="color:{{page.textColor}}; background-color:{{page.textBGColor}};">{{page.description}}</p>
   </div>

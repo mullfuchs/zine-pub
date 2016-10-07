@@ -1,7 +1,7 @@
 <h1>{{zine.title}}</h1>
   <div class="zinePage" ng-style="{'background-image':'url(' + page.backgroundImage + ')'}" ng-repeat="page in zine.pages track by $index" >
-    <h4>{{page.title}}</h4>
-    <p>{{page.description}}</p>
+    <h4 style="color:{{page.textColor}}; background-color:{{page.textBGColor}};">{{page.title}}</h4>
+    <p style="color:{{page.textColor}}; background-color:{{page.textBGColor}};">{{page.description}}</p>
   </div> 
 </div>
 

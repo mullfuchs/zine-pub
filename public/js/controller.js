@@ -80,7 +80,9 @@ angular.module('ZineCtrls', ['ZineServices'])
   $scope.currentPage = {
     heading: '',
     pageText: '',
-    bgImage: ''
+    bgImage: '',
+    textColor: '',
+    textBGColor: ''
   }
 
   $scope.previewPages = [];
@@ -90,34 +92,26 @@ angular.module('ZineCtrls', ['ZineServices'])
 
   $.cloudinary.config({ cloud_name: 'dlbfgtkpr', api_key: '398147833635538'})
 
-  // var ctx = $scope.canvas.getContext('2d');
-  // ctx.fillStyle = "#FFA500";
-  // ctx.fillRect (0, 0, 350, 550);
-  // ctx.font = "48px sans-serif";
-  // ctx.fillText($scope.zine.title.toString(), 10, 50);
+  // $("#textColor").spectrum({
+  //   color: "#fff",
+  //   change: function(color) {
+  //       $scope.currentPage.textColor = color.toHexString();
+  //       $scope.$apply();
+  //   }
+  // });  
 
-  // $scope.$watch('zine.title', function(){
-  //     ctx.save();
-  //     ctx.setTransform(1, 0, 0, 1, 0, 0);
-  //     ctx.clearRect(0, 0, $scope.canvas.width, $scope.canvas.height);
-  //     ctx.restore();
-  //     $scope.redraw();
-  // });
-
-  // $("#image-bg").change(function(e){
-  //   var URL = window.URL;
-  //   var url = URL.createObjectURL(e.target.files[0]);
-  //   $scope.zine.image = new Image();
-  //   $scope.zine.image.src = url;
-
-  //   $scope.zine.image.onload = function() {
-  //     $scope.redraw();
+  // $("#textBGColor").spectrum({
+  //   color: "#fff",
+  //   change: function(color) {
+  //       $scope.currentPage.textBGColor = color.toHexString();
+  //       $scope.$apply();
   //   }
   // });
 
+
   $scope.$watch('currentPage.bgImage',function(newVal, oldVal){
-    console.log(newVal);
-    console.log(oldVal);
+    //console.log(newVal);
+    //console.log(oldVal);
   });
 
   $scope.redraw = function(){
@@ -138,7 +132,9 @@ angular.module('ZineCtrls', ['ZineServices'])
     var newPage = {
       title: $scope.currentPage.heading,
       description: $scope.currentPage.pageText,
-      backgroundImage: $scope.currentPage.bgImage
+      backgroundImage: $scope.currentPage.bgImage,
+      textColor: $scope.currentPage.textColor,
+      textBGColor: $scope.currentPage.textBGColor
     }
     console.log(newPage);
     $scope.zine.pages.push(newPage);
